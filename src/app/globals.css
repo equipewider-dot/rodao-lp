@@ -1,0 +1,652 @@
+/* ==========================================================================
+   Rodão Pneus — Design System
+   Portado 1:1 do export standalone. Ordem original dos blocos de token:
+   cores → tipografia → espaçamento → efeitos.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Color tokens
+   Regra de hierarquia: VERMELHO = serviços padrão, CTAs, feixes de luz.
+   OURO = SÓ o diferencial da oferta (desconto, benefício-chave) — nunca com o
+   mesmo peso visual do vermelho na mesma peça.
+   -------------------------------------------------------------------------- */
+:root {
+  /* --- Brand base --- */
+  --rp-red: #e11414; /* principal */
+  --rp-red-shadow: #b50d0d; /* sombra/gradiente */
+  --rp-red-hover: #f0281f; /* lit / hover */
+  --rp-gold: #f2b71c; /* destaque */
+  --rp-gold-shadow: #e0a010; /* sombra/gradiente */
+
+  --rp-black: #0b0b0b; /* fundo base */
+  --rp-panel: #141414; /* painel */
+  --rp-panel-2: #16171a; /* painel alt (cinza-chumbo) */
+  --rp-line: #26262a; /* hairline / divisória */
+
+  --rp-white: #ffffff;
+  --rp-ink-100: #f5f4f2; /* texto principal sobre escuro */
+  --rp-ink-70: rgba(245, 244, 242, 0.72);
+  --rp-ink-45: rgba(245, 244, 242, 0.45);
+  --rp-hazard: #f2b71c; /* faixa de demarcação amarela (piso oficina) */
+
+  /* --- Gradients --- */
+  /* Preenchimento vermelho padrão: lit no topo, base no meio, sombra embaixo.
+     Nenhuma superfície vermelha usa #e11414 chapado — chapado lê como opaco. */
+  --grad-red: linear-gradient(
+    180deg,
+    var(--rp-red-hover) 0%,
+    var(--rp-red) 45%,
+    var(--rp-red-shadow) 100%
+  );
+  --grad-red-diag: linear-gradient(
+    135deg,
+    var(--rp-red-hover) 0%,
+    var(--rp-red) 45%,
+    var(--rp-red-shadow) 100%
+  );
+  --grad-gold: linear-gradient(180deg, var(--rp-gold) 0%, var(--rp-gold-shadow) 100%);
+  --grad-panel: linear-gradient(180deg, var(--rp-panel-2) 0%, var(--rp-black) 100%);
+  /* feixe / spotlight vermelho — presença sutil, não holofote */
+  --grad-beam: radial-gradient(
+    120% 80% at 50% 0%,
+    rgba(225, 20, 20, 0.2) 0%,
+    rgba(181, 13, 13, 0.06) 45%,
+    rgba(11, 11, 11, 0) 72%
+  );
+
+  /* --- Semantic aliases --- */
+  --surface-base: var(--rp-black);
+  --surface-panel: var(--rp-panel);
+  --surface-panel-alt: var(--rp-panel-2);
+  --surface-raised: #1d1e22;
+
+  --text-primary: var(--rp-ink-100);
+  --text-secondary: var(--rp-ink-70);
+  --text-muted: var(--rp-ink-45);
+  --text-on-red: var(--rp-white);
+  --text-on-gold: var(--rp-black);
+
+  --accent-primary: var(--rp-red); /* serviços, CTAs, feixes de luz */
+  --accent-highlight: var(--rp-gold); /* SÓ o diferencial da oferta */
+  --border-hairline: var(--rp-line);
+  --focus-ring: var(--rp-gold);
+
+  /* status (feedback técnico / funcional) */
+  --status-ok: #37b24d;
+  --status-warn: var(--rp-gold);
+  --status-danger: var(--rp-red);
+}
+
+/* --------------------------------------------------------------------------
+   Typography tokens
+   Títulos/headline: Saira Condensed, redondo (sem itálico), peso 500/600,
+   caixa normal. Caixa alta só em overline/kicker e no wordmark.
+   Corpo/legendas: Barlow Semi Condensed, 500/600.
+   Nunca serifada, arredondada ou "fofinha".
+   -------------------------------------------------------------------------- */
+:root {
+  --font-display: var(--font-saira-condensed), 'Arial Narrow', system-ui, sans-serif;
+  --font-body: var(--font-barlow-semi-condensed), 'Arial Narrow', system-ui, sans-serif;
+
+  /* Weights */
+  --fw-display: 600;
+  --fw-display-max: 700;
+  --fw-display-min: 500;
+  --fw-body: 500;
+  --fw-body-strong: 600;
+  --fw-body-max: 700;
+
+  /* Headlines em caixa normal, sem itálico */
+  --headline-style: normal;
+  --headline-transform: none;
+  --headline-tracking: 0.005em;
+  --headline-leading: 1.12;
+
+  /* Body */
+  --body-tracking: 0.01em;
+  --body-leading: 1.28;
+  --overline-tracking: 0.16em;
+
+  /* --- Escala tipográfica (calibrada para canvases sociais de 1080) --- */
+  --fs-hero: 148px;
+  --fs-display: 104px;
+  --fs-h1: 76px;
+  --fs-h2: 56px;
+  --fs-h3: 40px;
+  --fs-title: 30px;
+  --fs-body-lg: 26px;
+  --fs-body: 22px;
+  --fs-caption: 18px;
+  --fs-overline: 15px;
+  --fs-micro: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   Spacing & layout tokens — grid base de 4px.
+   -------------------------------------------------------------------------- */
+:root {
+  --sp-0: 0;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 80px;
+  --sp-10: 112px;
+
+  /* Padding seguro para peças de feed */
+  --canvas-pad: 72px;
+  --canvas-pad-tight: 48px;
+
+  /* Dimensões de canvas */
+  --canvas-45-w: 1080px;
+  --canvas-45-h: 1350px;
+  --canvas-11-w: 1080px;
+  --canvas-11-h: 1080px;
+  --canvas-916-w: 1080px;
+  --canvas-916-h: 1920px;
+}
+
+/* --------------------------------------------------------------------------
+   Effects: raios, bordas, sombras, grain, motion.
+   Marca agressiva/técnica → raios curtos, sombras duras, grain sutil em todo
+   fundo (nunca chapado).
+   -------------------------------------------------------------------------- */
+:root {
+  /* Radii — pequenos e mecânicos, nunca pill a não ser em tag de verdade */
+  --radius-none: 0;
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-tag: 999px;
+
+  /* Borders */
+  --border-1: 1px solid var(--rp-line);
+  --border-strong: 2px solid var(--rp-red);
+  --border-gold: 2px solid var(--rp-gold);
+  --skew: -7deg;
+
+  /* Shadows — discretas. O glow forte do export original era o principal
+     responsável pelo "exagero"; virou uma sombra de profundidade comum. */
+  --shadow-panel: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-raised: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-red-glow: 0 6px 20px rgba(225, 20, 20, 0.16);
+  --shadow-gold-glow: 0 6px 20px rgba(242, 183, 28, 0.16);
+  --shadow-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Grain — quase imperceptível, só tira o chapado do fundo */
+  --grain-opacity: 0.025;
+  --grain-url: url('/grain.png');
+
+  /* Motion — seco, sem bounce mole */
+  --ease-punch: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+}
+
+/* Overlay de grain reaproveitável — em um ::after full-bleed ou .rp-grain-overlay */
+.rp-grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain-url);
+  background-size: 220px 220px;
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Rodapé — marca à esquerda, endereço no meio, horário fechando na direita.
+   A coluna da marca é mais larga porque carrega logo + descrição. */
+.rp-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1180px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* Link de rede social: ícone e rótulo na mesma linha. Precisa da cor explícita
+   porque a regra global de `a` pinta tudo de vermelho. */
+.rp-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--rp-ink-70);
+  transition: color var(--dur) var(--ease-out);
+}
+
+.rp-social-link:hover,
+.rp-social-link:focus-visible {
+  color: var(--rp-red);
+}
+
+/* Quatro colunas só cabem no desktop; no meio do caminho ficam duas. */
+@media (min-width: 640px) {
+  .rp-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1040px) {
+  .rp-footer-grid {
+    grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Nav — os links de seção só cabem no desktop. Abaixo disso sobram a marca e o
+   CTA, que é o que importa no mobile numa página de uma seção só. */
+.rp-nav-links {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .rp-nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.8vw, 26px);
+  }
+}
+
+/* Horário é a primeira coisa a sair quando a barra aperta. */
+.rp-nav-hours {
+  display: none;
+}
+
+@media (min-width: 1140px) {
+  .rp-nav-hours {
+    display: inline-flex;
+  }
+}
+
+.rp-nav-link {
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--rp-ink-70);
+  transition: color var(--dur) var(--ease-out);
+}
+
+/* Filete que se desenha da esquerda no hover — mesmo gesto da régua do hero. */
+.rp-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 2px;
+  background: var(--grad-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.rp-nav-link:hover,
+.rp-nav-link:focus-visible {
+  color: var(--rp-ink-100);
+}
+
+.rp-nav-link:hover::after,
+.rp-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Com a barra fixa, a âncora precisa parar abaixo dela. */
+[id] {
+  scroll-margin-top: 92px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rp-nav-link::after {
+    transition: none;
+  }
+}
+
+/* Véu do hero. No desktop escurece só a coluna de texto (até 44% da largura) e
+   solta a direita inteira, onde vive o carro. */
+.rp-hero-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(11, 11, 11, 0.92) 0%,
+    rgba(11, 11, 11, 0.86) 46%,
+    rgba(11, 11, 11, 0.08) 58%,
+    rgba(11, 11, 11, 0) 70%,
+    rgba(11, 11, 11, 0) 100%
+  );
+}
+
+/* Fora do desktop o texto passa a ocupar a largura toda e cai justamente sobre a
+   faixa do horizonte, a parte mais clara da foto. Véu lateral não resolve isso:
+   aqui ele vira parelho e bem mais forte. */
+@media (max-width: 900px) {
+  .rp-hero-veil {
+    background: linear-gradient(
+      180deg,
+      rgba(11, 11, 11, 0.84) 0%,
+      rgba(11, 11, 11, 0.9) 55%,
+      rgba(11, 11, 11, 0.84) 100%
+    );
+  }
+}
+
+/* Hero — a foto entra afastando o zoom enquanto o texto sobe. Movimento longo e
+   único: dá vida à abertura sem virar carrossel animado. */
+.rp-hero-photo {
+  animation: rpHeroZoom 1800ms var(--ease-out) both;
+  will-change: transform;
+}
+
+/* A linha do rodapé do hero se desenha da esquerda para a direita. */
+.rp-hero-rule {
+  transform-origin: left center;
+  animation: rpRule 900ms var(--ease-out) 700ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-hero-photo,
+  .rp-hero-rule {
+    animation: none;
+  }
+}
+
+/* Cabeçalho de seção em duas colunas: título à esquerda, apoio à direita.
+   Os dois começam na mesma linha; um filete vertical liga as colunas. */
+.rp-section-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 880px) {
+  .rp-section-head {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(28px, 3.5vw, 48px);
+    align-items: start;
+  }
+
+  .rp-section-head-aside {
+    border-left: 1px solid rgba(245, 244, 242, 0.14);
+    padding-left: clamp(20px, 2.4vw, 32px);
+  }
+}
+
+/* Prova social — carrossel infinito full-bleed.
+   O espaçamento entre cards é margin no próprio card, nunca `gap`: o loop
+   translada exatamente -50%, e com `gap` sobraria meia fresta na emenda. */
+.rp-marquee-viewport {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
+
+.rp-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: rpMarquee 80s linear infinite;
+  will-change: transform;
+}
+
+.rp-marquee-viewport:hover .rp-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-marquee-track {
+    animation: none;
+  }
+}
+
+/* Sinais — 4 cards à esquerda e o CTA ocupando a coluna da direita inteira.
+   Abaixo de 1020px o CTA vira um card comum no fim da lista. */
+.rp-sinais-grid {
+  --sinais-gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sinais-gap);
+}
+
+/* O texto de abertura é item da grade para medir junto com os cards. Ocupa
+   SEMPRE a linha inteira: se sobrasse célula livre ao lado dele, o primeiro
+   card cairia lá em vez de abrir a fileira de baixo. O respiro até os cards
+   vira padding do próprio texto (gap + este padding = o antigo margin-top). */
+.rp-sinais-head {
+  grid-column: 1 / -1;
+  padding-bottom: clamp(28px, 4vw, 56px);
+  text-align: center;
+  margin-inline: auto;
+}
+
+@media (min-width: 680px) {
+  .rp-sinais-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1020px) {
+  .rp-sinais-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Largura travada nas duas colunas de cards, sem mexer no span: duas colunas
+     mais um gap = (200% - gap) / 3 da largura da grade. */
+  .rp-sinais-head {
+    max-width: calc((200% - var(--sinais-gap)) / 3);
+  }
+
+  /* Mesma caixa que o bloco de cards: começa na linha deles, não na do texto. */
+  .rp-sinais-cta {
+    grid-column: 3;
+    grid-row: 2 / span 2;
+  }
+}
+
+/* Unidades — endereço e mapa vivem no mesmo painel, separados só por um fio.
+   A borda e o raio são do container; as metades não têm moldura própria. */
+.rp-unidade-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  background: var(--grad-panel);
+  border: 1px solid var(--rp-line);
+  border-radius: var(--radius-lg);
+}
+
+/* Empilhado, o divisor é horizontal; lado a lado, vertical. */
+.rp-unidade-split > * + * {
+  border-top: 1px solid var(--rp-line);
+}
+
+@media (min-width: 880px) {
+  .rp-unidade-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .rp-unidade-split > * + * {
+    border-top: 0;
+    border-left: 1px solid var(--rp-line);
+  }
+}
+
+/* Serviços — linha full-bleed: texto à esquerda, foto grande à direita.
+   Empilha no mobile; vira duas colunas a partir de 880px. */
+.rp-service-row {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.rp-service-media {
+  position: relative;
+  min-height: 240px;
+}
+
+@media (min-width: 880px) {
+  .rp-service-row {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+
+  .rp-service-media {
+    min-height: clamp(300px, 26vw, 400px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--rp-black);
+  color: var(--rp-ink-100);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--rp-red);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--rp-red-hover);
+}
+
+::selection {
+  background: var(--rp-red);
+  color: #fff;
+}
+
+/* CTAButton — no export original esse par de regras vinha em um <style> inline
+   dentro do próprio botão; aqui vive uma vez só. */
+.rp-cta:hover {
+  filter: brightness(1.06);
+}
+
+.rp-cta:active {
+  transform: translateY(1px);
+}
+
+/* --------------------------------------------------------------------------
+   Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes rpBeam {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes rpHazard {
+  to {
+    background-position: 56px 0;
+  }
+}
+
+@keyframes rpFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes rpSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rpBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
+
+@keyframes rpGlow {
+  0%,
+  100% {
+    box-shadow: 0 5px 0 var(--rp-red-shadow), 0 0 24px rgba(225, 20, 20, 0.35);
+  }
+  50% {
+    box-shadow: 0 5px 0 var(--rp-red-shadow), 0 0 56px rgba(225, 20, 20, 0.65);
+  }
+}
+
+@keyframes rpMarquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rpHeroZoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes rpRule {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rpReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
