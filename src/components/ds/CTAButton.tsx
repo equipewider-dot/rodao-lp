@@ -1,6 +1,6 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 
-type Variant = 'primary' | 'gold' | 'ghost';
+type Variant = 'primary' | 'gold' | 'ghost' | 'whatsapp';
 type Size = 'sm' | 'md' | 'lg';
 
 type CommonProps = {
@@ -26,6 +26,12 @@ const SKINS: Record<Variant, { bg: string; fg: string; ring: string; glow: strin
     fg: 'var(--text-on-gold)',
     ring: 'var(--rp-gold-shadow)',
     glow: 'var(--shadow-gold-glow)',
+  },
+  whatsapp: {
+    bg: 'var(--grad-whats)',
+    fg: 'var(--text-on-whats)',
+    ring: 'var(--rp-whats-shadow)',
+    glow: 'none',
   },
   ghost: {
     bg: 'transparent',

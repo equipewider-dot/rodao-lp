@@ -39,7 +39,7 @@ export function Hero() {
       }}
     >
       <Image
-        src="/heronovo.png"
+        src="/hero-novo.png"
         alt=""
         aria-hidden
         fill

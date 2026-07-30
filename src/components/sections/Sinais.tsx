@@ -71,7 +71,7 @@ export function Sinais() {
                 textWrap: 'balance',
               }}
             >
-                Você não precisa entender de carro. Só precisa prestar atenção nisso aqui.
+                Você não precisa entender de carro. Só precisa prestar atenção nisso:
               </h2>
             </Reveal>
             <Reveal delay={180}>

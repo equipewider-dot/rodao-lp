@@ -98,7 +98,14 @@ export function Nav() {
           <span style={{ color: 'var(--rp-gold)' }}>Aberto seg–sáb</span>
           <span>7:30 às 17:30</span>
         </span>
-        <CTAButton as="a" href={site.whatsapp} target="_blank" rel="noopener" size="sm">
+        <CTAButton
+          as="a"
+          href={site.whatsapp}
+          target="_blank"
+          rel="noopener"
+          variant="whatsapp"
+          size="sm"
+        >
           <WhatsAppIcon size={18} />
           WhatsApp
         </CTAButton>

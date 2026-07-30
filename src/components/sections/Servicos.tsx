@@ -25,7 +25,7 @@ const SERVICOS: Servico[] = [
     title: 'Pneus e rodas',
     text: 'O pneu certo, calibrado e alinhado do jeito certo, é a diferença entre um carro seguro e um carro que engana.',
     chips: ['Pneus', 'Rodas', 'Alinhamento', 'Balanceamento'],
-    photo: '/servico-pneus.jpg',
+    photo: '/servico-pneus-comum.jpg',
     photoAlt: 'Pneu e roda de liga leve em detalhe',
   },
   {
