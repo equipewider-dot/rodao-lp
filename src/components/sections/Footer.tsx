@@ -82,6 +82,19 @@ export function Footer() {
             <br />
             {site.address.zip}
           </p>
+
+          {/* Telefones logo abaixo do endereço: mesma coluna, porque quem lê o
+              "onde" costuma querer o "como falar" em seguida. */}
+          <span style={{ ...labelStyle, marginTop: 22, marginBottom: 10 }}>Telefones</span>
+          <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 6 }}>
+            {site.phones.map((p) => (
+              <li key={p.href}>
+                <a href={p.href} style={{ ...bodyStyle, color: 'var(--rp-ink-100)' }}>
+                  {p.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>

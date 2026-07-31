@@ -89,7 +89,7 @@ export function Hero() {
             ordem em que se lê. Os atrasos são pequenos de propósito — a abertura
             inteira fecha em menos de 1s. */}
         <Reveal>
-          <Kicker color="red">Autocenter · Serra-ES · +30 anos</Kicker>
+          <Kicker color="red">Rodão desde 1989 · Serra-ES</Kicker>
         </Reveal>
         <Reveal delay={90}>
           <h1
